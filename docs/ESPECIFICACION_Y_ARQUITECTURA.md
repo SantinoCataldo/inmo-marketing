@@ -168,15 +168,21 @@ Para dotar a **InmoMarketing** de una experiencia de usuario de categoría mundi
   - El usuario podrá silenciar todos los sonidos en cualquier momento desde su barra de perfil (RF-AUTH-09).
   - Respetará la preferencia del sistema operativo del usuario.
 
-### 3.3 Animaciones Fluidas y Transiciones (Motion / Canvas Confetti)
+### 3.3 Animaciones Declarativas y Complejas (GSAP + @formkit/auto-animate / Canvas Confetti)
 - **Librerías:** 
-  - **Motion (anteriormente Motion One)** (`motion`): Creada por Matt Perry (el autor de Framer Motion). A diferencia de Framer Motion (que está fuertemente acoplada a la reconciliación de React), **Motion** es la biblioteca de animación agnóstica oficial para la Web, optimizada para ejecutarse sobre la **Web Animations API (WAAPI)** nativa del navegador.
+  - **@formkit/auto-animate** (`@formkit/auto-animate`): Motor de animación sin configuración (*zero-config*) con directiva declarativa para Angular.
+  - **GSAP (GreenSock Animation Platform)** (`gsap` + `@types/gsap`): El estándar de la industria para animaciones de alto rendimiento y orquestación compleja.
   - **Canvas Confetti** (`canvas-confetti` + `@types/canvas-confetti`): Generador ligero de confeti vectorial renderizado sobre canvas HTML5.
-- **Justificación y Filosofía de Movimiento:**
-  - Pesa menos de 4 KB comprimida (frente a librerías más pesadas).
-  - Cero *jank*: Se procesa en el compositor del navegador a 60/120 fps.
-  - Animaciones de resorte naturales (`spring`) sin rebote excesivo (`bounce: 0`), transiciones suaves de entrada (`stagger` de 100 ms) y salidas sutiles con `translateY` controlado.
-  - Al completar el Paso 5 ("Marcar como Publicada"), se dispara una ráfaga contenida de confeti para generar satisfacción inmediata al usuario.
+- **División de Roles de Animación en InmoMarketing:**
+  1. **Animaciones Declarativas con `@formkit/auto-animate`:**
+     - Mediante la directiva de Angular, anima de forma automática y fluida las transiciones de elementos en listas generadas con la nueva sintaxis de control de flujo `@for` (por ejemplo, al filtrar propiedades por tipo/operación o al actualizar el tablero de publicaciones).
+     - Gestiona sin esfuerzo las transiciones de visibilidad en bloques condicionales `@if` durante el avance y retroceso entre los 5 pasos del Wizard de Creación de Anuncios con IA.
+  2. **Animaciones Complejas y Timelines con `GSAP`:**
+     - **Timelines de Generación IA:** Secuencias dinámicas de loaders y estados de progreso visual durante el procesamiento de copys en Groq y diseño de flyers con OpenAI.
+     - **Contadores Numéricos en KPIs:** Interpolación fluida de valores numéricos (`gsap.to`) al cargar las métricas comerciales y de inventario en el Dashboard.
+     - **Integración con Lenis:** Sincronización cinemática con Lenis Smooth Scroll para transiciones elegantes en páginas de presentación.
+  3. **Celebración con `Canvas Confetti`:**
+     - Al completar el Paso 5 ("Marcar como Publicada"), se dispara una ráfaga contenida de confeti para generar satisfacción inmediata al agente inmobiliario.
 
 ### 3.4 Decodificación Segura de Tokens JWT (jwt-decode)
 - **Librería:** [jwt-decode](https://github.com/auth0/jwt-decode) (`jwt-decode`).

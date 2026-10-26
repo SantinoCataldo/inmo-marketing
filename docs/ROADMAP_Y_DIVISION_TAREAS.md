@@ -141,7 +141,7 @@ flowchart TD
 
 #### 1. Configuración de Entorno y Arquitectura Base
 - [ ] Configurar variables de entorno en `src/environments/environment.ts` (`production: false`, `apiUrl: 'http://localhost:8080'`) y `environment.prod.ts` (`apiUrl: 'https://inmo-marketing-api.onrender.com'`).
-- [ ] Instalación y gestión de dependencias oficiales con Bun: `bun add howler motion lenis html-to-image @angular/cdk ngx-sonner canvas-confetti material-symbols jwt-decode filepond filepond-plugin-image-preview filepond-plugin-file-validate-size filepond-plugin-file-validate-type` y `bun add -d @types/howler @types/canvas-confetti`.
+- [ ] Instalación y gestión de dependencias oficiales con Bun: `bun add howler gsap @formkit/auto-animate lenis html-to-image @angular/cdk ngx-sonner canvas-confetti material-symbols jwt-decode filepond filepond-plugin-image-preview filepond-plugin-file-validate-size filepond-plugin-file-validate-type` y `bun add -d @types/howler @types/canvas-confetti @types/gsap`.
 - [ ] Configurar tipografía Google Fonts `Inter` e iconografía `Google Material Symbols` en `index.html` con clases de soporte de números tabulares (`tabular-nums`) y directivas de Tailwind en `styles.css`.
 - [ ] Configurar e inicializar el proveedor de notificaciones `Ngx-Sonner` en `src/app/app.config.ts`.
 - [x] Crear los modelos modulares de tipos e interfaces TypeScript en `src/app/core/models/` (`auth`, `propiedad`, `publicacion`, `inmobiliaria`, `archivo`, `user`, `error`, `index.ts`).
