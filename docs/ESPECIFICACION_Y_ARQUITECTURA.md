@@ -3,6 +3,7 @@
 > **Versión:** 1.0.0  
 > **Estado:** Fase 0 - Documentación y Especificación de Ingeniería  
 > **Stack Objetivo:** Angular 22+ (Standalone Components, Signals, Reactive Forms, Modern Control Flow) & Tailwind CSS  
+> **Equipo:** Santi (Santino Cataldo), Seba, Marian (Mariano)  
 > **Backend de Referencia:** Spring Boot REST API (`https://github.com/marianoqqq/Marketing-Gestor`)  
 
 ---
@@ -382,7 +383,7 @@ Si se envía como `{ textoImagen: "...", estiloImagen: "..." }` en el body del `
 ## 5. Diccionario de Datos y Modelos de Dominio
 
 > [!NOTE]
-> La especificación canónica y el tipado estricto de estos modelos reside de forma ejecutable en [`src/app/core/models/api.models.ts`](file:///c:/Users/gc/Documents/inmo/src/app/core/models/api.models.ts). A continuación se documenta el contrato de datos alineado al 100% con el backend Spring Boot.
+> La especificación canónica y el tipado estricto de estos modelos reside de forma ejecutable y modular en el directorio [`src/app/core/models/`](file:///c:/Users/gc/Documents/inmo/src/app/core/models/) (`auth.models.ts`, `propiedad.models.ts`, `publicacion.models.ts`, `inmobiliaria.models.ts`, `archivo.models.ts`, `user.models.ts`, `error.models.ts`). A continuación se documenta el contrato de datos alineado al 100% con el backend Spring Boot.
 
 ### 5.1 Enums y Tipos Literales Restringidos
 

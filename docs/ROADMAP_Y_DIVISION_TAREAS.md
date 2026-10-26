@@ -28,7 +28,7 @@
   ▼
 [ FASE 1: Cimientos y Autenticación ] ──── Semanas 1 - 2
   - Configuración Tailwind, fuentes y tema visual.
-  - Modelos TypeScript globales (`api.models.ts`).
+  - Modelos TypeScript modulares por dominio (`src/app/core/models/`).
   - Servicios de Auth, Interceptores HTTP (JWT, Refresh con RxJS, Cold Start).
   - Vistas de Login, Registro y Layout principal (Sidebar + Navbar).
   ▼
@@ -58,15 +58,15 @@
 Para garantizar que múltiples desarrolladores trabajen en paralelo sin generar conflictos de merge destructivos, aplicaremos las siguientes reglas:
 
 ### 2.1 El "Contrato de Datos Primero" (Shared Types First)
-- Todo el equipo debe consensuar y congelar el archivo `src/app/core/models/api.models.ts` antes de escribir componentes.
+- Todo el equipo debe consensuar y congelar los modelos en `src/app/core/models/` antes de escribir componentes.
 - Si un desarrollador necesita agregar un tipo auxiliar específico de su vista, lo colocará en la carpeta interna de su feature (ej. `features/properties/models/property-filter.model.ts`), sin alterar el modelo core central salvo autorización del Lead Técnico.
 
 ### 2.2 Modularización Aislada por Dominio de Feature
-- Cada desarrollador trabajará dentro de su propia carpeta de `features/`:
-  - Desarrollador A: `src/app/features/properties/`
-  - Desarrollador B: `src/app/features/publications/`
-  - Desarrollador C: `src/app/features/admin/` y `dashboard/`
-  - Lead Técnico: `src/app/core/`, `layout/` y `shared/`
+- Cada integrante trabajará enfocado en su área:
+  - **Santi:** `src/app/core/`, `layout/` y `shared/` (Líder Técnico & Core Architect)
+  - **Seba:** `src/app/features/properties/` y galería multimedia Cloudflare R2
+  - **Marian:** `src/app/features/publications/` (Wizard interactivo con IA, Groq/OpenAI) y sincronización con API
+  - Módulos de administración y dashboard coordinados entre el equipo.
 - Los archivos compartidos (`shared/components`, `core/services`) no se tocan sin avisar previamente por canal de comunicación.
 
 ### 2.3 Estrategia de Ramas Git (GitFlow Simplificado)
@@ -90,16 +90,16 @@ Para garantizar que múltiples desarrolladores trabajen en paralelo sin generar 
 
 ---
 
-## 3. Matriz de Roles y Asignación Sugerida de Integrantes
+## 3. Matriz de Roles y Asignación de Integrantes
 
-Esta estructura está diseñada para un equipo de 3 a 4 estudiantes o ingenieros de software:
+Esta estructura organiza las responsabilidades del equipo de trabajo:
 
-| Rol Asignado | Responsable Sugerido | Módulos y Carpetas a Cargo | Dependencias Clave |
+| Rol Asignado | Responsable | Módulos y Carpetas a Cargo | Dependencias Clave |
 |---|---|---|---|
-| **Líder Técnico & Core Architect** | Integrante 1 | `src/app/core/`<br>`src/app/layout/`<br>`src/app/shared/components/toast/`<br>`src/app/core/http/` | Define interceptores, layout general, autenticación y maneja el Cold Start de Render. |
-| **Ingeniero de Propiedades & R2** | Integrante 2 | `src/app/features/properties/`<br>`src/app/shared/components/drag-drop/`<br>`src/app/shared/pipes/auth-image.pipe.ts` | Depende de la base de autenticación para consumir `/api/propiedades` y `/api/archivos`. |
-| **Ingeniero de Publicaciones & IA** | Integrante 3 | `src/app/features/publications/` (Wizard interactivo de 5 pasos, tablero de estados y detalle) | Consume `PropertyService` para asociar fotos y datos de inmuebles a los prompts de Groq/OpenAI. |
-| **Ingeniero de Administración & UI/UX** | Integrante 4 (o compartido) | `src/app/features/admin/`<br>`src/app/features/dashboard/`<br>`src/app/shared/components/metrics/` | Depende de `roleGuard` y de los modelos consolidados de usuarios e inmobiliarias. |
+| **Líder Técnico & Core Architect** | **Santi** | `src/app/core/`<br>`src/app/layout/`<br>`src/app/shared/components/toast/`<br>`src/app/core/http/` | Define interceptores, layout general, autenticación y maneja el Cold Start de Render. |
+| **Ingeniero de Propiedades & R2** | **Seba** | `src/app/features/properties/`<br>`src/app/shared/components/drag-drop/`<br>`authImagePipe` | Depende de la base de autenticación para consumir `/api/propiedades` y `/api/archivos`. |
+| **Ingeniero de Publicaciones & IA** | **Marian** | `src/app/features/publications/` (Wizard interactivo de 5 pasos, tablero de estados y detalle) | Consume `PropertyService` para asociar fotos y datos de inmuebles a los prompts de Groq/OpenAI. |
+| **Ingeniero de Administración & UI/UX** | **Equipo (Santi / Seba / Marian)** | `src/app/features/admin/`<br>`src/app/features/dashboard/`<br>`src/app/shared/components/metrics/` | Depende de `roleGuard` y de los modelos consolidados de usuarios e inmobiliarias. |
 
 ---
 
@@ -144,7 +144,7 @@ flowchart TD
 - [ ] Instalación y gestión de dependencias oficiales con Bun: `bun add howler motion lenis html-to-image @angular/cdk ngx-sonner canvas-confetti material-symbols jwt-decode filepond filepond-plugin-image-preview filepond-plugin-file-validate-size filepond-plugin-file-validate-type` y `bun add -d @types/howler @types/canvas-confetti`.
 - [ ] Configurar tipografía Google Fonts `Inter` e iconografía `Google Material Symbols` en `index.html` con clases de soporte de números tabulares (`tabular-nums`) y directivas de Tailwind en `styles.css`.
 - [ ] Configurar e inicializar el proveedor de notificaciones `Ngx-Sonner` en `src/app/app.config.ts`.
-- [ ] Crear el archivo integral de tipos e interfaces TypeScript en `src/app/core/models/api.models.ts`.
+- [x] Crear los modelos modulares de tipos e interfaces TypeScript en `src/app/core/models/` (`auth`, `propiedad`, `publicacion`, `inmobiliaria`, `archivo`, `user`, `error`, `index.ts`).
 
 #### 2. Servicios de Autenticación, Almacenamiento Seguro y Preferencias
 - [ ] Implementar `TokenStorageService` para lectura/escritura segura de `accessToken` y `refreshToken` en `localStorage`.

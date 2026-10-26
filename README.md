@@ -79,7 +79,13 @@ src/
 │   │   │   ├── cold-start.interceptor.ts # Detección de arranque en frío (>4s)
 │   │   │   └── error.interceptor.ts # Captura global de ErrorResponse
 │   │   ├── models/                  # Interfaces y Enums globales de TypeScript
-│   │   │   └── api.models.ts        # Contrato de datos íntegro con el Backend
+│   │   │   ├── auth.models.ts       # Modelos de sesión y tokens
+│   │   │   ├── propiedad.models.ts  # Modelos de inmuebles y enums
+│   │   │   ├── publicacion.models.ts# Modelos de campañas e IA
+│   │   │   ├── inmobiliaria.models.ts# Perfil corporativo
+│   │   │   ├── archivo.models.ts    # Metadatos Cloudflare R2
+│   │   │   ├── user.models.ts       # Gestión de usuarios
+│   │   │   └── index.ts             # Barrel export general
 │   │   └── services/                # Servicios transversales (notificaciones, sistema, sonido)
 │   │       ├── notification.service.ts
 │   │       ├── sound.service.ts     # Control de audio con Howler.js
@@ -202,3 +208,11 @@ Para profundizar en la ingeniería del proyecto y el plan de trabajo del equipo,
 
 2. **[Roadmap y División de Tareas del Equipo](docs/ROADMAP_Y_DIVISION_TAREAS.md):**  
    Cronograma de desarrollo dividido en 4 fases, estrategia para evitar conflictos de merge en Git, asignación de roles entre los integrantes y checklist maestro granular con todas las tareas a construir.
+
+---
+
+## 👥 Equipo de Desarrollo
+
+- **Santi (Santino Cataldo)** - Frontend Lead & Arquitectura
+- **Seba** - Frontend Developer (Propiedades & Multimedia Cloudflare R2)
+- **Marian (Mariano)** - Backend & Frontend Developer (Publicaciones & Modelos IA)
