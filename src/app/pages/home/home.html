@@ -1,3 +1,10 @@
-<main class="flex min-h-[60vh] items-center justify-center p-8">
-  <h1 class="text-3xl font-bold tracking-tight text-slate-800">Home</h1>
+<main class="min-h-screen bg-[#070d0a] p-6 sm:p-12 text-slate-100 flex flex-col items-center justify-center">
+  <div class="w-full max-w-md">
+    <app-fluid-modal-disclosure
+      [heroTag]="'InmoMarketing'"
+      [heroTitle]="'sb\nMoney'"
+      [heroSubtitle]="'Tu dinero, claro y simple en un lugar bonito.'"
+      (authSubmitted)="onAuthSubmitted($event)"
+    />
+  </div>
 </main>
